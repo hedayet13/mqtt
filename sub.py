@@ -1,6 +1,9 @@
 import paho.mqtt.client as mqtt
+import time
+
 MQTT_SERVER = "test.mosquitto.org"
 MQTT_PATH = "Image1"
+
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -13,18 +16,22 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, msg):
+    start = time.time()
     # more callbacks, etc
     # Create a file with write byte permission
     f = open('output.jpg', "wb")
     f.write(msg.payload)
-    print("Image Received:")
+    end = time.time()
+    print("Image Received:",end-start)
+
     f.close()
 
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 client.connect(MQTT_SERVER, 1883, 60)
-
+end = time.time()
+# print(end-start)
 # Blocking call that processes network traffic, dispatches callbacks and
 # handles reconnecting.
 # Other loop*() functions are available that give a threaded interface and a

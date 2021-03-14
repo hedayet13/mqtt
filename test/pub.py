@@ -3,6 +3,7 @@ import time
 
 start = time.time()
 
+
 MQTT_SERVER = "test.mosquitto.org"  #Write Server IP Address
 MQTT_PATH = "Image1"
 
@@ -17,6 +18,5 @@ fileContent = f.read()
 byteArr = bytearray(fileContent)
 publish.single(MQTT_PATH, byteArr, hostname=MQTT_SERVER)
 
-totalTime = time.time()-start
-
-print('Done at ',totalTime)
+end = time.time()
+print("done at ",end-start)
