@@ -22,7 +22,8 @@ def on_message(client, userdata, msg):
     f = open('output.jpg', "wb")
     f.write(msg.payload)
     end = time.time()
-    print("Image Received:",end-start)
+    res= end -start
+    print("Image Received:",res)
 
     f.close()
 
